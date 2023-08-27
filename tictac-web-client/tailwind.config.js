@@ -13,7 +13,9 @@ module.exports = {
         'primary-purple': '#443B5E',
         'secondary-purple': '#8266A0',
         'alternative-white': '#EFEDF5'
-
+      },
+      boxShadow: {
+        'main-shadow': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
       }
     },
   },
