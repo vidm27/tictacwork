@@ -1,10 +1,12 @@
-export interface Task{
+import { Duration } from "moment"
+
+export interface TaskTimer{
   id: string,
   intervalId: any,
   title: string,
   projectName?:string
   monetize?: boolean,
-  duration: number,
-  momentStart?: number
-  momentEnd?: number
+  duration?: Duration,
+  momentStart: number
+  momentEnd: number
 }
