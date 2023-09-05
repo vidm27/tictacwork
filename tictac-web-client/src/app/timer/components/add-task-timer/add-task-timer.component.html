@@ -1,1 +1,35 @@
-<p>add-task-timer works!</p>
+<div class="px-3 py-4 mb-7 flex justify-between bg-alternative-white rounded-md shadow-main-shadow">
+  <input [(ngModel)]="task.title" type="text" name="nameTask" id="nameTask" placeholder="What are your working now?" class="bg-transparent w-full outline-none placeholder:text-slate-500">
+  <div class="flex justify-between items-center basis-3/5">
+    <div class="px-3 text-center flex gap-2 items-center cursor-pointer">
+      <span><svg class="inline" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.1429 6.28571H6.85714V10.2143C6.85714 10.4227 6.76684 10.6225 6.60609 10.7699C6.44535 10.9172 6.22733 11 6 11C5.77267 11 5.55465 10.9172 5.39391 10.7699C5.23316 10.6225 5.14286 10.4227 5.14286 10.2143V6.28571H0.857143C0.629814 6.28571 0.411797 6.20293 0.251051 6.05558C0.090306 5.90823 0 5.70838 0 5.5C0 5.29162 0.090306 5.09177 0.251051 4.94442C0.411797 4.79707 0.629814 4.71429 0.857143 4.71429H5.14286V0.785714C5.14286 0.57733 5.23316 0.37748 5.39391 0.23013C5.55465 0.0827802 5.77267 0 6 0C6.22733 0 6.44535 0.0827802 6.60609 0.23013C6.76684 0.37748 6.85714 0.57733 6.85714 0.785714V4.71429H11.1429C11.3702 4.71429 11.5882 4.79707 11.7489 4.94442C11.9097 5.09177 12 5.29162 12 5.5C12 5.70838 11.9097 5.90823 11.7489 6.05558C11.5882 6.20293 11.3702 6.28571 11.1429 6.28571Z" fill="#8266A0"/>
+        </svg>
+        </span>
+      <span class="text-secondary-accent">Project</span>
+    </div>
+    <div class="px-3">
+      <button><svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6 1V19M10.1667 3.7H3.91667C3.14312 3.7 2.40125 4.03187 1.85427 4.62261C1.30729 5.21335 1 6.01457 1 6.85C1 7.68543 1.30729 8.48665 1.85427 9.07739C2.40125 9.66813 3.14312 10 3.91667 10H8.08333C8.85688 10 9.59875 10.3319 10.1457 10.9226C10.6927 11.5134 11 12.3146 11 13.15C11 13.9854 10.6927 14.7866 10.1457 15.3774C9.59875 15.9681 8.85688 16.3 8.08333 16.3H1"
+            stroke="#A9A4B6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+    <div class="px-3"><span>{{elapsedTime}}</span></div>
+    <div class="">
+      <button *ngIf="isStartTrackingTime === false; else stopTimerTracking" (click)="startTimeTracking()" type="button" class="rounded-full bg-secondary-purple px-2 py-2 hover:bg-primary-purple transition-all">
+        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.5169 8.96329C20.9772 9.20806 21.3622 9.57346 21.6307 10.0203C21.8992 10.4672 22.041 10.9787 22.041 11.5C22.041 12.0213 21.8992 12.5328 21.6307 12.9797C21.3622 13.4265 20.9772 13.7919 20.5169 14.0367L8.23877 20.7134C6.26173 21.7887 3.83331 20.3895 3.83331 18.1777V4.82329C3.83331 2.60954 6.26173 1.21134 8.23877 2.28563L20.5169 8.96329Z" fill="white"/>
+          </svg>
+      </button>
+      <ng-template #stopTimerTracking>
+        <button (click)="stopTime()" type="button" class="rounded-full bg-red-accent px-2 py-2 transition-all">
+          <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 11.5C0 6.0789 0 3.36835 1.6836 1.6836C3.3695 0 6.0789 0 11.5 0C16.9211 0 19.6316 0 21.3152 1.6836C23 3.3695 23 6.0789 23 11.5C23 16.9211 23 19.6316 21.3152 21.3152C19.6328 23 16.9211 23 11.5 23C6.0789 23 3.36835 23 1.6836 21.3152C0 19.6328 0 16.9211 0 11.5Z" fill="white"/>
+            </svg>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
