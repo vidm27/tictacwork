@@ -19,5 +19,5 @@ export class TimerService {
     this.tasksTimer.push(newTask)
   }
 
-
+  
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TaskTimer } from '../../interfaces/task.interface';
-import { utc, Duration, duration, isDuration } from 'moment';
+import * as dayjs from "dayjs";
 
 
 @Component({
@@ -10,25 +10,20 @@ import { utc, Duration, duration, isDuration } from 'moment';
 })
 export class ListTaskComponent {
 
+  public totalDuration : string ='00:00:00'
+
   @Input()
   public tasks: TaskTimer[] = [
   ]
 
-  public formatTime(moment: Duration|number, allowSecond: boolean = false) {
-    // const newMoment = Math.floor(moment / 1000)
-
-
-
-    if (isDuration(moment)){
-      return utc(moment.milliseconds()).format('HH:mm:ss')
-    }else{
-      moment = duration(moment)
-      return utc(moment.milliseconds()).format('HH:mm:ss')
+  public formatTime(moment: any, duration: boolean = false) {
+    if(duration){
+      return dayjs().startOf('day').second(moment).format('HH:mm:ss');
     }
-
-    // return÷ utc(moment.milliseconds()).format('HH:mm:ss')
+    return dayjs(moment).format('HH:mm')
   }
-  private formatTimeSegment(segment: number): string {
-    return segment < 10 ? `0${segment}` : segment.toString();
+
+  public sumaDurations(){
+    
   }
 }

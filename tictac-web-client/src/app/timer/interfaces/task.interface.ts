@@ -1,4 +1,3 @@
-import { Duration } from "moment"
 
 export interface TaskTimer{
   id: string,
@@ -6,7 +5,7 @@ export interface TaskTimer{
   title: string,
   projectName?:string
   monetize?: boolean,
-  duration?: Duration,
-  momentStart: number
-  momentEnd: number
+  duration?: any,
+  momentStart: any
+  momentEnd: any
 }

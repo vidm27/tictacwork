@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TaskTimer } from '../../interfaces/task.interface';
-import * as moment from "moment";
+import * as dayjs from "dayjs";
 @Component({
   selector: 'app-add-task-timer',
   templateUrl: './add-task-timer.component.html',
@@ -33,17 +33,14 @@ export class AddTaskTimerComponent {
   }
 
   private updateTime(): void{
-    const currentTime = moment.now(); // Obtener la hora actual en milisegundos
+    const currentTime = dayjs() // Obtener la hora actual en milisegundos
     if (this.task.momentStart === undefined) {
       this.task.momentStart = currentTime; // Almacenar el tiempo de inicio si es la primera vez
     }
-    const elapsedTimeMilliseconds = currentTime - this.task.momentStart; // Calcular la diferencia
-
-    // Crear una duración Moment.js a partir de la diferencia en milisegundos
-    const taskDuration = moment.duration(elapsedTimeMilliseconds);
-
+    const elapsedTimeSeconds = currentTime.diff(this.task.momentStart, 'second'); // Calcular la diferencia
     // Formatear la duración en el formato "HH:mm:ss"
-    const formattedTime = moment.utc(taskDuration.asMilliseconds()).format('HH:mm:ss');
+    this.task.duration = elapsedTimeSeconds;
+    const formattedTime = dayjs().startOf('day').second(elapsedTimeSeconds).format('HH:mm:ss');
 
     // Actualizar el tiempo transcurrido en tu componente
     this.elapsedTime = formattedTime;
@@ -52,11 +49,11 @@ export class AddTaskTimerComponent {
   }
 
   // private formatTimeSegment(segment: number): string {
-  //   return moment.utc(segment.)
+  //   return dayjs.utc(segment.)
   // }
 
   public stopTime(): void{
-    this.task.momentEnd = moment.now()
+    this.task.momentEnd = dayjs()
     clearInterval(this.task.intervalId);
     this.isStartTrackingTime = false
     this.onNewTask.emit({...this.task});
