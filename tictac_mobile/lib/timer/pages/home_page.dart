@@ -49,14 +49,94 @@ class HomeScreen extends ConsumerWidget {
                 Expanded(
                   child: Container(
                     color: const Color(0xFF443A5F),
-                    height: 200,
+                    height: 230,
                     child: Center(
-                      child: Text(
-                        formatedTime(timer),
-                        style: const TextStyle(
-                            fontSize: 36,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 25, right: 25, bottom: 30, top: 25),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Wrap(
+                              direction: Axis.vertical,
+                              alignment: WrapAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                const SizedBox(height: 10),
+                                const Text(
+                                  "Tarea de ejemplo",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color:
+                                          Color.fromARGB(255, 215, 186, 248)),
+                                ),
+                                Text(
+                                  formatedTime(timer),
+                                  style: const TextStyle(
+                                      fontSize: 36,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 25),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Wrap(
+                                    direction: Axis.vertical,
+                                    alignment: WrapAlignment.center,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    spacing: 2,
+                                    children: [
+                                      Text(
+                                        'Tiempo Límite',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Color.fromARGB(
+                                                255, 215, 186, 248)),
+                                      ),
+                                      Text(
+                                        '00:00:00',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Wrap(
+                                    direction: Axis.vertical,
+                                    alignment: WrapAlignment.center,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    spacing: 2,
+                                    children: [
+                                      Text(
+                                        'Total de hoy',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Color.fromARGB(
+                                                255, 215, 186, 248)),
+                                      ),
+                                      Text(
+                                        '00:00:00',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -64,29 +144,117 @@ class HomeScreen extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 20),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              IconButton(
-                onPressed: () {
-                  ref.read(timerProvider.notifier).startTimer();
-                },
-                icon: const Icon(Icons.play_arrow_rounded),
-                style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(Color(0xFFE76963),),
-                        iconColor: MaterialStatePropertyAll(Colors.white)),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView.separated(
+                  itemCount: 15,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      // leading: Icon(Icons.car_rental),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      title: const Text('Tarea de diseno'),
+                      titleTextStyle: const TextStyle(
+                          fontSize: 18,
+                          color: Color(0xFF605879),
+                          fontWeight: FontWeight.normal),
+                      subtitle: const Text('00:00:00'),
+                      subtitleTextStyle: const TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF8366A1),
+                          fontWeight: FontWeight.bold),
+                      trailing: Container(
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                    color: Color.fromRGBO(214, 208, 223, 1),
+                                    width: 1.0))),
+                        child: IconButton(
+                            iconSize: 40,
+                            style: const ButtonStyle(
+                                iconColor: MaterialStatePropertyAll(
+                                    Color(0xFF443A5F))),
+                            onPressed: () {},
+                            icon: const Icon(Icons.play_arrow_rounded)),
+                      ),
+                      tileColor: const Color(0xFFEFEDF4),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                      width: double.infinity,
+                    );
+                  },
+                ),
               ),
-              const SizedBox(width: 20),
-              IconButton(
-                onPressed: () {
-                  ref.read(timerProvider.notifier).stopTimer();
-                },
-                icon: const Icon(Icons.stop_rounded),
-                style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(Color(0xFF443A5F),),
-                        iconColor: MaterialStatePropertyAll(Colors.white)),
+            ),
+            SafeArea(
+              child: Container(
+                color: Colors.amber,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {
+                          ref.read(timerProvider.notifier).startTimer();
+                        },
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                              Color(0xFFE76963),
+                            ),
+                            iconColor: MaterialStatePropertyAll(Colors.white)),
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        onPressed: () {
+                          ref.read(timerProvider.notifier).stopTimer();
+                        },
+                        icon: const Icon(Icons.stop_rounded),
+                        style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                              Color(0xFF443A5F),
+                            ),
+                            iconColor: MaterialStatePropertyAll(Colors.white)),
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        onPressed: () {
+                          // ref.read(timerProvider.notifier).stopTimer();
+                          showModalBottomSheet(
+                              context: context,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20))),
+                              builder: (context) {
+                                return const SizedBox(
+                                  height: 200,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Column(children: [
+                                      TextField(
+                                        decoration: InputDecoration(
+                                          border: UnderlineInputBorder(),
+                                          labelText: 'Nombre de tarea'
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                );
+                              });
+                        },
+                        icon: const Icon(Icons.add_rounded),
+                        style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                              Color(0xFF443A5F),
+                            ),
+                            iconColor: MaterialStatePropertyAll(Colors.white)),
+                      ),
+                    ]),
               ),
-            ])
+            )
           ],
         ),
       ),
