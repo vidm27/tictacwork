@@ -11,6 +11,9 @@ class Project extends Model
 {
     use HasUuids;
 
+    protected $fillable = ['title', 'client_id'];
+
+
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);

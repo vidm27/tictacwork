@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ApiClientController;
+use App\Http\Controllers\ApiProjectController;
+use App\Http\Controllers\ApiTaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource(
+    'clients',
+    ApiClientController::class
+);
+Route::apiResource(
+    'tasks',
+    ApiTaskController::class
+);
+Route::apiResource(
+    'projects',
+    ApiProjectController::class
+);
