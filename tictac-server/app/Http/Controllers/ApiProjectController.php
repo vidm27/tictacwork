@@ -49,6 +49,7 @@ class ApiProjectController extends Controller
     public function show(string $id)
     {
         //
+        return Project::findOrFail($id);
     }
 
     /**
@@ -57,6 +58,19 @@ class ApiProjectController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $project = Project::findOrFail($id);
+        if($request->has('client_id')){
+            $project->update($request->only(['client_id']));
+        }
+        if($request->has('title')){
+            $project->update($request->only(['title']));
+        }
+        $data = [
+            'message' => 'Project updated succesfully',
+            'project' => $project
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -64,6 +78,14 @@ class ApiProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+
+        $data = [
+            'message' => 'Project deleted succesfully',
+            'project' => $project
+        ];
+
+        return response()->json($data);
     }
 }
