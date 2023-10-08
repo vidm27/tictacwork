@@ -15,9 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->decimal('hour_price', 6, 2);
             $table->decimal('part_time_price', 6, 2);
-            $table->datetime('created')->default(now());
-            $table->datetime('modified')->nullable();
-
+            $table->timestamps();
         });
     }
 

@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->uuid(column:'id')->unique();
             $table->string('title',length:500);
-            $table->timestamp('duration');
-            $table->timestamp('momnetStart');
-            $table->timestamp('momnetEnd');
-            $table->foreignUuid('project_id')->constrained('projects')->onUpdate('cascade')->onDelete('cascade');
+            $table->time('duration');
+            $table->dateTime('moment_start');
+            $table->dateTime('moment_end');
+            $table->foreignUuid('project_id')->nullable()->constrained('projects')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignUuid('tag_id')->nullable()->constrained('tags');
+            $table->timestamps();
         });
     }
 
